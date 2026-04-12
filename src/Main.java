@@ -6,7 +6,7 @@ public class Main {
         //test class to run tests
         LoginTest test = new LoginTest();
 
-        //creates an obj of the login class
+        //creates an object of the login class
         Login userLogin = new Login();
 
         // Step 1: Register user
