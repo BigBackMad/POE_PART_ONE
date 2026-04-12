@@ -125,7 +125,7 @@ public class Login {
         return enteredUserName.equals(userName) && enteredPassword.equals(password);
     }
 
-    String returnLoginStatus(boolean loginUser){
+    String returnLoginStatus(boolean loginUser) {
 
         if (loginUser) {
             return "\nWelcome " + userFirstName + " " + userLastName + ", it is great to see you again.";
