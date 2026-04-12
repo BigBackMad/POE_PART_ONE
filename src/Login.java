@@ -118,7 +118,7 @@ public class Login {
         //checks if the username entered matches the registered username
         System.out.println("\nEnter your username: ");
         String enteredUserName = sc.nextLine();
-        //same for the password
+        //checks if the password matches
         System.out.println("Enter your password: ");
         String enteredPassword = sc.nextLine();
 
