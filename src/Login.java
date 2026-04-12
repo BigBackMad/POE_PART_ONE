@@ -70,7 +70,7 @@ public class Login {
 
     public String getPassword() { return password; } //accessor method to retrieve value
 
-    public String getPhoneNumber() { return cellPhoneNumber; } // same for the phone number
+    public String getPhoneNumber() { return cellPhoneNumber; }
 
 
     public Boolean checkUserName (String userName) {
