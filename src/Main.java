@@ -18,7 +18,7 @@ public class Main {
 
         while (!userloggedIn) {
             boolean status = userLogin.loginUser();
-            System.out.println(userLogin.returnLoginStatus(status)); //Step 2: Login - ask for username and passwords
+            System.out.println(userLogin.returnLoginStatus(status)); //Step 2: Login - ask for username and password
             // Step 3: returns as true or false
 
             if (status) {                           // exits the loop if the login was successful
