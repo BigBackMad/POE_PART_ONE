@@ -11,14 +11,11 @@ public class Login {
     private String userName;
     private String password;
     private String cellPhoneNumber;
-    private String userFirstName, userLastName;
+    private String userFirstName;
+    private String userLastName;
+
 
     public String registerUser() {
-
-        System.out.println("Please enter your first name");
-        userFirstName = sc.nextLine();
-        System.out.println("Please enter your last name");
-        userLastName = sc.nextLine();
 
         //username
         do {
@@ -62,9 +59,6 @@ public class Login {
         return "User " + userName +  " has been successfully registered!!\n";
     }
 
-    public String getUserFirstName() { return userFirstName; }
-
-    public String getUserLastName() { return userLastName; }
 
     public String getUserName() { return userName; }//since username is set up as private we set up an accessor method to retrieve value
 
@@ -123,6 +117,13 @@ public class Login {
         String enteredPassword = sc.nextLine();
 
         return enteredUserName.equals(userName) && enteredPassword.equals(password);
+    }
+
+    //using a setter method to assign values from the main class
+    // encapsulation
+    public void setUserDetails(String firstName, String lastName) {
+        this.userFirstName = firstName;
+        this.userLastName = lastName;
     }
 
     String returnLoginStatus(boolean loginUser) {
