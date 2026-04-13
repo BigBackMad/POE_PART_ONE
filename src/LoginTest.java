@@ -46,7 +46,6 @@ public class LoginTest {
         assertFalse(login.checkCellPhoneNumber("08966553"));
     }
 
-    @Test
 
 
 
