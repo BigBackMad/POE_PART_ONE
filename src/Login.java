@@ -15,6 +15,14 @@ public class Login {
     private String userLastName;
 
 
+    //using a setter method to assign values from the main class
+    // encapsulation
+    public void setUserDetails(String firstName, String lastName) {
+        this.userFirstName = firstName;
+        this.userLastName = lastName;
+    }
+
+
     public String registerUser() {
 
         //username
@@ -119,12 +127,6 @@ public class Login {
         return enteredUserName.equals(userName) && enteredPassword.equals(password);
     }
 
-    //using a setter method to assign values from the main class
-    // encapsulation
-    public void setUserDetails(String firstName, String lastName) {
-        this.userFirstName = firstName;
-        this.userLastName = lastName;
-    }
 
     String returnLoginStatus(boolean loginUser) {
 

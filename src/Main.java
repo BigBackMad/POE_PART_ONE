@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+     static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
 
@@ -16,7 +16,6 @@ public class Main {
         System.out.println("Please enter your last name");
         String lastName = sc.nextLine();
 
-        //passes the user input into the login object so it can store and use values in login class
         userLogin.setUserDetails(firstName, lastName);
 
         // Step 1: Register user
