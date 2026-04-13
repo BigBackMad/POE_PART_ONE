@@ -15,7 +15,6 @@ public class Main {
 
         //loops until value changes to true and user logs in successfully
         boolean userloggedIn = false;
-        System.out.println("hey");
 
         while (!userloggedIn) {
             boolean status = userLogin.loginUser();
