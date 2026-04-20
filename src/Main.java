@@ -18,7 +18,7 @@ public class Main {
 
         userLogin.setUserDetails(firstName, lastName);
 
-        // Step 1: Register user
+        // Registering user
         String registrationDetails = userLogin.registerUser();
         System.out.println(registrationDetails);
 
@@ -27,8 +27,8 @@ public class Main {
 
         while (!userloggedIn) {
             boolean status = userLogin.loginUser();
-            System.out.println(userLogin.returnLoginStatus(status)); //Step 2: Login - ask for username and password
-            // Step 3: returns as true or false
+            System.out.println(userLogin.returnLoginStatus(status)); //Login part - asks for username and password
+            // returns as true or false
 
             if (status) {                           // exits the loop if the login was successful
                 userloggedIn = true;
