@@ -40,7 +40,7 @@ public class Main {
                 System.out.println("1 - Send Messages");
                 System.out.println("2 - Show recently sent messages");
                 System.out.println("3 - Quit");
-                System.out.print("Enter choice: ");
+                System.out.print("\nEnter choice: ");
                 int choice = sc.nextInt();
                 sc.nextLine();
 
@@ -66,7 +66,16 @@ public class Main {
                             System.out.print("Enter recipient number >> ");
                             String recipient = sc.nextLine();
                             userMessage.setRecipientCell(recipient);
-                            userMessage.checkRecipientCell();
+
+                            while(!userMessage.checkRecipientCell().equals("Cell phone number successfully captured.")){
+
+                                System.out.println(userMessage.checkRecipientCell());
+                                System.out.println("PLease re-enter the number >> ");
+                                userMessage.setRecipientCell(sc.nextLine());
+
+                            }
+
+                            System.out.println(userMessage.checkRecipientCell());
 
                             System.out.print("Please enter your message (max 250 characters) >> ");
                             String messageText = sc.nextLine(); // Initialize the loop control variable
@@ -81,7 +90,7 @@ public class Main {
                                 messageText = sc.nextLine(); // Alter the loop control variable to avoid infinite loop
                             }
 
-                            // passin the valid string to your object
+                            // passing the string to your object
                             userMessage.setMessageContent(messageText);
                             System.out.println("Message ready to send."); //
 
@@ -102,7 +111,7 @@ public class Main {
                             if (userChoice == 1) {
                                 System.out.println("\n--- MESSAGE DETAILS ---");
 
-                                // We call the method and print its return value immediately
+                                // We call the method and print its return value
                                 System.out.println(userMessage.printMessages());
 
                                 System.out.println("----------------------------\n");

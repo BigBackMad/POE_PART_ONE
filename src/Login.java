@@ -25,6 +25,11 @@ public class Login {
 
     public String registerUser() {
 
+        System.out.println("Please enter your first name: ");
+        userFirstName = sc.nextLine();
+        System.out.println("Please enter your Last name: ");
+        userLastName = sc.nextLine();
+
         //username
         do {
             System.out.println("\nEnter your username: (Username must contain an underscore and be no more than five characters long)");
