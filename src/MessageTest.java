@@ -20,7 +20,7 @@ public class MessageTest {
 
     @Test
     public void testCheckMessageLengthFailure() {
-        // Create a string that is exactly 251 characters (1 over the limit) 
+        // Create a string that is over 250 characters
         // using String.repeat() 
         String longContent = "a".repeat(251);
 
@@ -59,6 +59,24 @@ public class MessageTest {
         // Assert 
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void testMessageIDCreated() {
+        // arrange
+        String fixedID = "1234567890";
+        testMessage.setMessageID(fixedID);
+
+        // call
+        String actualResult = testMessage.checkMessageID();
+
+        // ASSERT: Verify the result matches
+        // expected string is: "Message ID generated: <Message ID>"
+        String expectedResult = "Message ID generated: " + fixedID;
+
+        assertEquals(expectedResult, actualResult,
+                "The ID status message should match required format.");
+    }
+
 
     @Test
     public void testCreateMessageHashMike() {

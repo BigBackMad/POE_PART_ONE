@@ -37,13 +37,13 @@ public class Message {
 
     }
 
-    public Boolean checkMessageID() {
+    public String checkMessageID() {
 
         // ennsures ID is not more than 10 characters
         if (this.messageID != null && this.messageID.length() <= 10) {
-            return true;
+            return "Message ID generated: " + this.messageID;
         } else {
-            return false;
+            return "Message ID creation failed.";
         }
 
     }

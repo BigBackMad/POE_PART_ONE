@@ -59,9 +59,7 @@ public class Main {
                             String ID = userMessage.generateMessageID();
                             userMessage.setMessageID(ID);
 
-                            if (userMessage.checkMessageID()){
-                                System.out.println("Message ID Generated: " + ID);
-                            }
+                            System.out.println(userMessage.checkMessageID());
 
                             System.out.print("Enter recipient number >> ");
                             String recipient = sc.nextLine();
