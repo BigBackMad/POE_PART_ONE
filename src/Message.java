@@ -131,8 +131,8 @@ public class Message {
 
             // 2. Write the object to a file
             // The '4' in toString(4) adds indentation for readability
-            FileWriter file = new FileWriter("stored_messages.json", true);
-            file.write(jo.toString(4) + "\n");
+            FileWriter file = new FileWriter("stored_messages.json", false);
+            file.write(jo.toString(4));
             file.close();
 
             System.out.println("JSON storage successful.");

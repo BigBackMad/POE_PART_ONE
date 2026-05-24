@@ -79,18 +79,19 @@ public class Main {
                             String messageText = sc.nextLine(); // Initialize the loop control variable
 
                             //The Validation Loop: Tests the condition before allowing progress
-                            while (messageText.length() > 250) {
-                                int excess = messageText.length() - 250; // Calculate X for the error message
+                            while (!userMessage.checkMessageLength(messageText).equals("Message ready to send.")) {
 
-                                System.out.println("Message exceeds 250 characters by " + excess + "; please reduce the size.");
-
+                                System.out.println(userMessage.checkMessageLength(messageText));
+                                sc.nextLine();
                                 System.out.print("Please re-enter your message >> ");
                                 messageText = sc.nextLine(); // Alter the loop control variable to avoid infinite loop
+
                             }
 
                             // passing the string to your object
                             userMessage.setMessageContent(messageText);
-                            System.out.println("Message ready to send."); //
+                            System.out.println(userMessage.checkMessageLength(messageText)); // Displays that the message is ready to send
+                            System.out.println();
 
                             // Displaying the Send/Disregard/Store Menu
                             System.out.println("1 - Send Message");
