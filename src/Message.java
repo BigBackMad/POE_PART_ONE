@@ -1,9 +1,12 @@
+import java.nio.file.Files;
 import java.util.Random;
 import java.util.*;
 import java.util.regex.Matcher;
 import org.json.JSONObject;
 import java.io.FileWriter;
 import java.io.File;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Message {
 
@@ -121,22 +124,47 @@ public class Message {
     }
 
     public void storeMessage() {
+
         try {
-            // 1. Create the JSON Object and 'put' your fields into it
+
             JSONObject jo = new JSONObject();
+
             jo.put("messageID", this.messageID);
             jo.put("messageHash", this.createMessageHash());
             jo.put("recipient", this.recipientCell);
             jo.put("payload", this.message);
 
-            // 2. Write the object to a file
-            // The '4' in toString(4) adds indentation for readability
-            FileWriter file = new FileWriter("stored_messages.json", false);
-            file.write(jo.toString(4));
-            file.close();
+            File file = new File("stored_messages.json");
+
+            JSONArray arr;
+
+            // If file already has messages
+            if (file.exists() && file.length() > 0) {
+
+                String content = new String(Files.readAllBytes(file.toPath()));
+
+                arr = new JSONArray(content);
+
+            } else {
+
+                // First message
+                arr = new JSONArray();
+            }
+
+            // Add new message
+            arr.put(jo);
+
+            // Rewrite file with updated array
+            FileWriter writer = new FileWriter(file);
+
+            writer.write(arr.toString(4));
+
+            writer.close();
 
             System.out.println("JSON storage successful.");
+
         } catch (Exception e) {
+
             System.out.println("Failed to write JSON: " + e.getMessage());
         }
     }

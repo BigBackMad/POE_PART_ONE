@@ -118,7 +118,23 @@ public class Main {
                                 System.out.println("----------------------------\n");
                             }
 
-                            if (userChoice == 3) {
+                            if (userChoice == 2) {
+
+                                // indefinite loop for validation (Defensive Programming)
+                                System.out.print("Action required >> ");
+                                int deleteConfirm = sc.nextInt();
+
+                                while (deleteConfirm != 0) {
+                                    System.out.println("Invalid input. You must press 0 to confirm deletion.");
+                                    System.out.print("Action required >> ");
+                                    deleteConfirm = sc.nextInt();
+                                }
+
+                            }
+
+
+
+                                if (userChoice == 3) {
                                 userMessage.storeMessage();
                             }
 

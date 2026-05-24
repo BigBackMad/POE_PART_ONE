@@ -1,6 +1,20 @@
-{
-    "payload": "Hi, please call me.",
-    "recipient": "+27740475689",
-    "messageID": "8412631041",
-    "messageHash": "84:0:HIME"
-}
+[
+    {
+        "payload": "Hi, how are you?",
+        "recipient": "+27740472897",
+        "messageID": "2426130084",
+        "messageHash": "24:0:HIYOU"
+    },
+    {
+        "payload": "I bought us food, when will you get here?",
+        "recipient": "+27740472897",
+        "messageID": "9289531357",
+        "messageHash": "92:0:IHERE"
+    },
+    {
+        "payload": "Please call me when you see this",
+        "recipient": "+27740472897",
+        "messageID": "3397876432",
+        "messageHash": "33:0:PLEASETHIS"
+    }
+]
