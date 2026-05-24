@@ -109,6 +109,8 @@ public class Main {
                             System.out.println(status);
 
                             if (userChoice == 1) {
+
+                                userMessage.generateMessageCount();
                                 System.out.println("\n--- MESSAGE DETAILS ---");
 
                                 // We call the method and print its return value

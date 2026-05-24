@@ -12,7 +12,7 @@ public class Message {
     static int messageCount = 0;
     private String message;
 
-    public Message() {
+    public void generateMessageCount() {
         messageCount++; // Increment by 1 for every instance created
     }
 
