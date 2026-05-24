@@ -12,6 +12,10 @@ public class Message {
     static int messageCount = 0;
     private String message;
 
+    public Message() {
+        messageCount++; // Increment by 1 for every instance created
+    }
+
     public static String generateMessageID(){
 
         Random random = new Random();
@@ -35,7 +39,7 @@ public class Message {
 
     public Boolean checkMessageID() {
 
-        // Condition: ensures ID is not more than 10 characters
+        // ennsures ID is not more than 10 characters
         if (this.messageID != null && this.messageID.length() <= 10) {
             return true;
         } else {
@@ -45,7 +49,7 @@ public class Message {
     }
 
     public void setRecipientCell(String recipient) {
-        this.recipientCell = recipient; // 'this' refers to the class field [16, 17]
+        this.recipientCell = recipient; // 'this' refers to the class field
     }
 
     public void setMessageContent(String messageText) {
@@ -54,22 +58,21 @@ public class Message {
 
 
     public String checkRecipientCell() {
-        // Reuse your regex string from Part 1 here
-        String regex = "^\\+\\d{1,9}$"; // Example: starts with + and total length <= 10
+        String regex = "(\\+27|0)[0-9]{9}"; // Eg: starts with + and total length <= 10
 
         if (this.recipientCell != null && this.recipientCell.matches(regex)) {
-            return "Cell phone number successfully captured."; // PoE Success String [7]
+            return "Cell phone number successfully captured.";
         } else {
             return "Cell phone number is incorrectly formatted or does not contain " +
-                    "an international code. Please correct the number and try again."; // PoE Failure String [7]
+                    "an international code. Please correct the number and try again.";
         }
     }
 
     public String createMessageHash() {
-        // 1. Get the first 2 digits of the Message ID
+        // Get the first 2 digits of the Message ID
         String idPrefix = this.messageID.substring(0, 2);
 
-        // 2. Split the message into individual words using a regex for spaces
+        // Split the message into individual words using a regex for spaces
         // The trim() ensures we don't have leading/trailing spaces causing errors
         String[] words = this.message.trim().split("\\s+");
 
@@ -77,8 +80,11 @@ public class Message {
         String firstWord = words[0];
         String lastWord = words[words.length - 1];
 
-        // 4. Combine all elements with colons
-        // We use .toUpperCase() on the words as required by the PoE
+        firstWord = firstWord.replaceAll("[^a-zA-Z]", "");
+        lastWord = lastWord.replaceAll("[^a-zA-Z]", "");
+
+        // Combine all elements with colons
+        // using .toUpperCase() on the words as required by the PoE
         String messageHash = idPrefix + ":" + messageCount + ":" +
                 (firstWord + lastWord).toUpperCase();
 
@@ -86,16 +92,13 @@ public class Message {
     }
 
     public String SentMessage(int userChoice) {
-        // We use a switch statement to evaluate the user's choice [5, 6]
+        // use a switch statement to evaluate the user's choice
         switch (userChoice) {
             case 1:
-                // POE Success String for "Send"
                 return "Message successfully sent.";
             case 2:
-                // POE String for "Disregard"
                 return "Press 0 to delete the message.";
             case 3:
-                // POE String for "Store"
                 return "Message successfully stored.";
             default:
                 return "Invalid selection.";
@@ -103,7 +106,7 @@ public class Message {
     }
 
     public String printMessages() {
-        // We build the report using the PoE's required sequence: ID, Hash, Recipient, Message
+        // sequence: ID, Hash, Recipient, Message
         String report = "Message ID: " + this.messageID +
                 "\nMessage Hash: " + this.createMessageHash() +
                 "\nRecipient: " + this.recipientCell +
@@ -112,13 +115,12 @@ public class Message {
         return report;
     }
 
-    public int returnTotalMessages() {
-        // Simply returns the current value of your static counter
+    public static int returnTotalMessages() {
+        //  returns the current value of your static counter
         return messageCount;
     }
 
     public void storeMessage() {
-        // Logic for JSON serialization and file writing goes here
         try {
             // 1. Create the JSON Object and 'put' your fields into it
             JSONObject jo = new JSONObject();
@@ -136,6 +138,15 @@ public class Message {
             System.out.println("JSON storage successful.");
         } catch (Exception e) {
             System.out.println("Failed to write JSON: " + e.getMessage());
+        }
+    }
+
+    public String checkMessageLength(String text) {
+        if (text.length() <= 250) {
+            return "Message ready to send.";
+        } else {
+            int excess = text.length() - 250;
+            return "Message exceeds 250 characters by " + excess + "; please reduce the size.";
         }
     }
 

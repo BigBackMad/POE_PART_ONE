@@ -30,11 +30,12 @@ public class Main {
         }
 
         if (userloggedIn) {
+            System.out.println();
             System.out.println("Welcome to QuickChat.");
 
             boolean running = true;
             while (running) {
-                // 1. Display Menu [3]
+                // 1. Display Menu
                 System.out.println("\nMain Menu:");
                 System.out.println("1 - Send Messages");
                 System.out.println("2 - Show recently sent messages");
@@ -65,30 +66,60 @@ public class Main {
                             System.out.print("Enter recipient number >> ");
                             String recipient = sc.nextLine();
                             userMessage.setRecipientCell(recipient);
+                            userMessage.checkRecipientCell();
 
-                            System.out.print("Enter message text >> ");
-                            String messageText = sc.nextLine();
+                            System.out.print("Please enter your message (max 250 characters) >> ");
+                            String messageText = sc.nextLine(); // Initialize the loop control variable
+
+                            //The Validation Loop: Tests the condition before allowing progress
+                            while (messageText.length() > 250) {
+                                int excess = messageText.length() - 250; // Calculate X for the error message
+
+                                System.out.println("Message exceeds 250 characters by " + excess + "; please reduce the size.");
+
+                                System.out.print("Please re-enter your message >> ");
+                                messageText = sc.nextLine(); // Alter the loop control variable to avoid infinite loop
+                            }
+
+                            // passin the valid string to your object
                             userMessage.setMessageContent(messageText);
+                            System.out.println("Message ready to send."); //
 
-                            // 1. Display the Send/Disregard/Store Menu
+                            // Displaying the Send/Disregard/Store Menu
                             System.out.println("1 - Send Message");
                             System.out.println("2 - Disregard Message");
                             System.out.println("3 - Store Message");
                             System.out.print("Choose an option >> ");
 
                             int userChoice = sc.nextInt();
-                            sc.nextLine(); // Consume newline
+                            sc.nextLine();
 
-                            // 2. Call the method and print the result
+                            // Calls  method and print  result
                             String status = userMessage.SentMessage(userChoice);
+                            System.out.println();
                             System.out.println(status);
 
-                            // Logic: Generate ID, Get Recipient, Get Message, Create Hash
-                            // (Call your checkMessageID and checkRecipientCell methods here)
+                            if (userChoice == 1) {
+                                System.out.println("\n--- MESSAGE DETAILS ---");
+
+                                // We call the method and print its return value immediately
+                                System.out.println(userMessage.printMessages());
+
+                                System.out.println("----------------------------\n");
+                            }
+
+                            if (userChoice == 3) {
+                                userMessage.storeMessage();
+                            }
+
+
                         }
 
-                        // 4. Display total after the for loop
-                        // System.out.println("Total messages sent: " + msg.returnTotalMessagess());
+                        // Display total after the for loop
+                        System.out.println("\n=================================");
+                        System.out.println("TOTAL MESSAGES SENT: " + Message.returnTotalMessages());
+                        System.out.println("=================================");
+
                         break;
 
                     case 2:
