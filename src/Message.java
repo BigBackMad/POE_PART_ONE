@@ -125,10 +125,10 @@ public class Message {
     }
 
     /**
-     * ATTRIBUTION:
      * 1.  Baeldung "Introduction to JSON-Java (org.json)"
      * 2.  BeginnersBook "Convert JSON Array to ArrayList in Java"
      * 3.  Farrell's "Java Programming" Chapter 11
+     * 4. GeeksforGeeks "Java program to convert file to a byte array"
      */
 
     public void storeMessage() {
