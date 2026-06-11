@@ -42,7 +42,7 @@ public class ReportTest {
 
     @Test
     public void testSentMessagesArray() {
-        assertEquals("Did you get the cake?", sentMessages);
+        assertEquals("Did you get the cake?", sentMessages[0]);
         assertEquals("It is dinner time !", sentMessages[3]);
     }
 
