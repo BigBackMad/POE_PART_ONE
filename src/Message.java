@@ -133,20 +133,17 @@ public class Message {
 
     public void storeMessage() {
 
-        try { //method interacts with nonvolatile storage (the hard drive) "risky" compared to internal RAM
-            // use try{} so that program doesnt crash if systems fials
-
-
-            //DATA ENCAPSULATION: Creating a JSONObject to store unordered key-value pairs
+        try {
+            // DATA ENCAPSULATION: Creating a JSONObject to store unordered key-value pairs
             JSONObject jo = new JSONObject();
 
-            //The put() method automatically handles wrapping String values in double quotes
+            // The put() method automatically handles wrapping String values in double quotes
             jo.put("messageID", this.messageID);
             jo.put("messageHash", this.createMessageHash());
             jo.put("recipient", this.recipientCell);
-            jo.put("payload", this.message);
+            jo.put("payload", this.message); // "contains the actual message text"
 
-            //FReferencing a file on nonvolatile storage
+            // Referencing a file on nonvolatile storage
             File file = new File("stored_messages.json");
 
             JSONArray arr;
@@ -154,15 +151,20 @@ public class Message {
             // If file already has messages (defensive programming)
             if (file.exists() && file.length() > 0) {
 
-               // perform a bulk transfer of the JSON data from nonvolatile storage into a String
-                // allows it to break text into its component JSON objects so you can add a new message to the list
+                // Perform a bulk transfer of the JSON data from nonvolatile storage into a String
                 String content = new String(Files.readAllBytes(file.toPath()));
+                String trimmed = content.trim();
 
-                arr = new JSONArray(content);
+                // Guard before parsing
+                if (!trimmed.isEmpty() && trimmed.startsWith("[")) {
+                    arr = new JSONArray(trimmed);
+                } else {
+                    arr = new JSONArray(); // file is corrupt/empty, start fresh
+                }
 
             } else {
 
-                // First message/clear message then initialise new container
+                // First message or clear file, initialise new container
                 arr = new JSONArray();
             }
 
@@ -170,21 +172,21 @@ public class Message {
             arr.put(jo);
 
             // Rewrite file with updated array
-            //  use overwrite mode (false) because we are writing the entire updated array.
+            // Use overwrite mode (false) because we are writing the entire updated array
             FileWriter writer = new FileWriter(file);
 
             // Use toString(4) to add a 4-space indent to make JSON human-readable
             writer.write(arr.toString(4));
 
-            writer.close(); //if doesnt close then it can cause data to be lost
+            writer.close(); // if doesnt close then it can cause data to be lost
 
             System.out.println("JSON storage successful.");
 
         } catch (Exception e) {
-
-            System.out.println("Failed to write JSON: " + e.getMessage()); //prevents program crashes
+            System.out.println("Failed to write JSON: " + e.getMessage()); // prevents program crashes
         }
     }
+
 
     public String checkMessageLength(String text) {
         if (text.length() <= 250) {
