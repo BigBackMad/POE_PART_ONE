@@ -1,6 +1,29 @@
 import java.util.Scanner;
+import org.json.JSONObject;
+import java.io.FileWriter;
+import java.io.File;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.nio.file.Files;
+
 
 public class Main {
+
+    //Constants
+    private static final int MAX_MESSAGES = 100;
+
+    // DECLARATIONS: Parallel arrays
+    static String[] sentMessages = new String[MAX_MESSAGES];
+    static String[] disregardedMessages = new String[MAX_MESSAGES];
+    static String[] storedMessages = new String[MAX_MESSAGES];
+    static String[] messageIDs = new String[MAX_MESSAGES];
+    static String[] messageHashes = new String[MAX_MESSAGES];
+    static String[] recipientCells = new String[MAX_MESSAGES];
+
+    // COUNTERS: To track the next available index
+    static int sentCount = 0;
+    static int disregardCount = 0;
+    static int storedCount = 0;
 
     static Scanner sc = new Scanner(System.in);
 
@@ -40,6 +63,7 @@ public class Main {
                 System.out.println("1 - Send Messages");
                 System.out.println("2 - Show recently sent messages");
                 System.out.println("3 - Quit");
+                System.out.println("4 - Stored Messages Report");
                 System.out.print("\nEnter choice: ");
                 int choice = sc.nextInt();
                 sc.nextLine();
@@ -97,6 +121,7 @@ public class Main {
                             System.out.println("1 - Send Message");
                             System.out.println("2 - Disregard Message");
                             System.out.println("3 - Store Message");
+
                             System.out.print("Choose an option >> ");
 
                             int userChoice = sc.nextInt();
@@ -109,6 +134,13 @@ public class Main {
 
                             if (userChoice == 1) {
 
+                                sentMessages[sentCount] = messageText;
+                                messageIDs[sentCount] = ID;
+                                messageHashes[sentCount] = userMessage.createMessageHash();
+                                recipientCells[sentCount] = recipient;
+
+                                sentCount++;
+
                                 userMessage.generateMessageCount();
                                 System.out.println("\n--- MESSAGE DETAILS ---");
 
@@ -119,6 +151,12 @@ public class Main {
                             }
 
                             if (userChoice == 2) {
+
+                                //Store the text currently held in the 'messageText' variable
+                                disregardedMessages[disregardCount] = messageText;
+
+                                //INCREMENTING: Move the 'disregardCount' forward
+                                disregardCount++;
 
                                 // indefinite loop for validation (Defensive Programming)
                                 System.out.print("Action required >> ");
@@ -134,7 +172,7 @@ public class Main {
 
 
 
-                                if (userChoice == 3) {
+                            if (userChoice == 3) {
                                 userMessage.storeMessage();
                             }
 
@@ -157,10 +195,56 @@ public class Main {
                         running = false; // Exit Part 2 loop
                         break;
 
+                    case 4:
+                        Report.populateStoredMessages(messageIDs, messageHashes, recipientCells, storedMessages);
+
+                        System.out.println("\n--- STORED MESSAGES REPORT ---");
+                        System.out.println("a. Display All Senders and Recipients");
+                        System.out.println("b. Display Longest Stored Message");
+                        System.out.println("c. Search by Message ID");
+                        System.out.println("d. Search by Recipient");
+                        System.out.println("e. Delete Message by Hash");
+                        System.out.println("f. Display Full Report");
+                        System.out.print("Select a report task (a-f) >> ");
+
+                        String subChoice = sc.nextLine().toLowerCase();
+
+                        switch (subChoice) {
+                            case "a":
+                                Report.displayContacts(userLogin.getUserFirstName() + " " + userLogin.getUserLastName(), recipientCells);
+                                break;
+                            case "b":
+                                Report.displayLongestMessage(storedMessages);
+                                break;
+                            case "c":
+                                System.out.print("Enter ID: ");
+                                System.out.println(Report.searchByID(sc.nextLine(), messageIDs, recipientCells, storedMessages));
+                                break;
+                            case "d":
+                                System.out.print("Enter Recipient: ");
+                                System.out.println(Report.searchByRecipient(sc.nextLine(), recipientCells, storedMessages));
+                                break;
+                            case "e":
+                                System.out.print("Enter Hash: ");
+                                System.out.println(Report.deleteByHash(sc.nextLine(), messageHashes, storedMessages, messageIDs, recipientCells));
+                                break;
+                            case "f":
+                                System.out.println(Report.displayFullReport(messageIDs, messageHashes, recipientCells, storedMessages));
+                                break;
+                            default:
+                                System.out.println("Invalid option.");
+                                break;
+                        }
+                        break;
+
+
                     default:
                         System.out.println("Invalid option.");
                 }
             }
         }
     }
+
+
 }
+

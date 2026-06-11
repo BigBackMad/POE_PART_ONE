@@ -79,6 +79,10 @@ public class Login {
 
     public String getPhoneNumber() { return cellPhoneNumber; }
 
+    public String getUserFirstName(){ return userFirstName; }
+
+    public String getUserLastName(){ return userLastName; }
+
 
     public Boolean checkUserName (String userName) {
         return (userName.contains("_") && userName.length() <= 5);
