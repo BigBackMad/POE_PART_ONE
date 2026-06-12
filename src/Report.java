@@ -64,7 +64,7 @@ public class Report {
 
         String longest = "";
 
-        for (String msg : storedMessages) {
+        for (String msg : storedMessages) { // Enhanced for loop: iterates over every message in the array
             if (msg != null && msg.length() > longest.length()) {
                 longest = msg;
             }
@@ -163,7 +163,7 @@ public class Report {
 
     public static String displayFullReport(String[] ids, String[] hashes, String[] recipients, String[] messages) {
 
-        // StringBuilder efficiently builds the report by appending each line without creating new String objects
+        // StringBuilder builds the report without creating new String objects
         StringBuilder report = new StringBuilder();
 
         report.append("\n-------------------------------------------\n");
