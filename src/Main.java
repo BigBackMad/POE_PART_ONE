@@ -20,7 +20,7 @@ public class Main {
     static String[] messageHashes = new String[MAX_MESSAGES];
     static String[] recipientCells = new String[MAX_MESSAGES];
 
-    // COUNTERS: To track the next available index
+    //track the next available index
     static int sentCount = 0;
     static int disregardCount = 0;
     static int storedCount = 0;

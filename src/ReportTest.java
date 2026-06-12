@@ -10,7 +10,7 @@ public class ReportTest {
     private String[] storedMessages = new String[8];
     private String[] hashes = new String[8];
 
-    @BeforeEach
+    @BeforeEach //JUnit annotation that runs the annotated method before each individual test, used to reset/reinitialise test data
     public void setup() {
 
         // Message 1 - Sent 
@@ -91,12 +91,10 @@ public class ReportTest {
 
         assertTrue(result.contains("FULL STORED MESSAGES REPORT"), "Report must contain the correct title.");
 
-        // 2. Verify Message 1 data synchronization (ID, Recipient, and Text) [1] 
         assertTrue(result.contains("M1"), "Report should contain ID for Message 1.");
         assertTrue(result.contains("+27834557896"), "Report should contain Recipient for Message 1.");
         assertTrue(result.contains("Did you get the cake?"), "Report should contain the Message 1 text.");
 
-        // 3. Verify Message 4 data synchronization (The "Search ID" from the rubric) [7] 
         assertTrue(result.contains("0838884567"), "Report should contain the ID/Recipient for Message 4.");
         assertTrue(result.contains("It is dinner time !"), "Report should contain the Message 4 text.");
     }
