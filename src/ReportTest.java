@@ -30,7 +30,7 @@ public class ReportTest {
         storedMessages[2] = "Yohoooo, I am at your gate.";
 
         // Message 4 - Sent (SEARCH BY ID) 
-        ids[3] = "0838884567";
+        ids[3] = "M4";
         recipients[3] = "0838884567";
         sentMessages[3] = "It is dinner time !";
 
@@ -59,7 +59,7 @@ public class ReportTest {
     @Test
     public void testSearchByID() {
 
-        String result = Report.searchByID("0838884567", ids, recipients, sentMessages);
+        String result = Report.searchByID("M4", ids, recipients, sentMessages);
         assertTrue(result.contains("It is dinner time !"));
     }
 
