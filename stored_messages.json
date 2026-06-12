@@ -1,1 +1,14 @@
-[]
+[
+    {
+        "payload": "Hi, where are you",
+        "recipient": "+27740472867",
+        "messageID": "9786654186",
+        "messageHash": "97:0:HIYOU"
+    },
+    {
+        "payload": "I bought you a gift",
+        "recipient": "+27740475647",
+        "messageID": "1765342657",
+        "messageHash": "17:0:IGIFT"
+    }
+]
