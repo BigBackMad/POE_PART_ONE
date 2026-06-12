@@ -93,14 +93,18 @@ public class Report {
 
     public static String searchByRecipient(String searchKey, String[] recipients, String[] messages) {
 
+        // StringBuilder used to accumulate multiple results without creating new String objects each time
         StringBuilder results = new StringBuilder();
 
         for (int i = 0; i < recipients.length; i++) {
 
+            // skip empty/unfilled slots in the array
             if (recipients[i] != null) {
 
+                // Case-insensitive comparison so "+27831234567" matches regardless of formatting
                 if (recipients[i].equalsIgnoreCase(searchKey)) {
 
+                    // Append the matching message to results with a divider
                     results.append("Message: ").append(messages[i]).append("\n--------------------------------------\n");
                 }
             }
@@ -159,6 +163,7 @@ public class Report {
 
     public static String displayFullReport(String[] ids, String[] hashes, String[] recipients, String[] messages) {
 
+        // StringBuilder efficiently builds the report by appending each line without creating new String objects
         StringBuilder report = new StringBuilder();
 
         report.append("\n-------------------------------------------\n");
@@ -169,6 +174,7 @@ public class Report {
 
         for (int i = 0; i < ids.length; i++) {
 
+            // Skip empty array slots — only process messages that actually exist
             if (ids[i] != null) {
 
                 report.append("Message ID:    ").append(ids[i]).append("\n");
@@ -181,12 +187,14 @@ public class Report {
             }
         }
 
+        // check if no valid slots were found
         if (!recordsFound) {
             return "NO DATA FOUND: The stored message history is empty.";
         }
 
         report.append("---- END OF REPORT ----\n\n");
 
+        // Convert StringBuilder to a String for returning and printing
         return report.toString();
     }
 
